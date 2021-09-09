@@ -9,19 +9,7 @@ import UIKit
 
 class PhotosViewController: UIViewController {
 
-    let networkDataFetcher = NetworkDataFetcher()
-    
-    var photos: Photos? {
-        didSet {
-            fetchImages()
-        }
-    }
-    
-    var photosImages: [UIImage] = [] {
-        didSet {
-            photosCollectionView.reloadData()
-        }
-    }
+    var viewModel: PhotosCollectionsViewModel
     
     private lazy var photosCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -36,13 +24,23 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkDataFetcher.fetchPhotos { response in
-            guard let search = response else { return }
-            self.photos = search
-        }
+        view.backgroundColor = .blue
         setupLayout()
+        viewModel.reloadComplition = { [weak self] in
+            self?.photosCollectionView.reloadData()
+        }
+        
     }
-
+    
+    init(viewModel: PhotosCollectionsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 extension PhotosViewController {
@@ -57,19 +55,6 @@ extension PhotosViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func fetchImages() {
-        DispatchQueue.main.async {
-            guard let photosNasa = self.photos?.photos else { return }
-            for photo in photosNasa {
-                let stringURL = photo.imgSrc
-                let url = URL(string: stringURL)
-                if let data = try? Data(contentsOf: url!) {
-                    self.photosImages.append(UIImage(data: data)!)
-                }
-                print(self.photosImages.count)
-            }
-        }
-    }
 }
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -86,20 +71,25 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos?.photos.count ?? 0
+        return viewModel.countPhotos
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        cell.photoImageView.image = photosImages[indexPath.row]
+        viewModel.fetchImages(index: indexPath.row) { [weak cell] image in
+            cell?.photoImageView.image = image
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        /*
         let vc = DetailPhotoViewController()
         vc.albumsImageView.image = photosImages[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
+        */
+        
     }
 }

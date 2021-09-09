@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2769F42126EA277400E065A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F42026EA277400E065A1 /* AppDelegate.swift */; };
 		2769F42326EA277400E065A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F42226EA277400E065A1 /* SceneDelegate.swift */; };
-		2769F42826EA277400E065A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2769F42626EA277400E065A1 /* Main.storyboard */; };
 		2769F42B26EA277400E065A1 /* TestProject_Nasa.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2769F42926EA277400E065A1 /* TestProject_Nasa.xcdatamodeld */; };
 		2769F42D26EA277500E065A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2769F42C26EA277500E065A1 /* Assets.xcassets */; };
 		2769F43026EA277500E065A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2769F42E26EA277500E065A1 /* LaunchScreen.storyboard */; };
@@ -20,13 +19,13 @@
 		2769F44526EA39DC00E065A1 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F44426EA39DC00E065A1 /* NetworkDataFetcher.swift */; };
 		2769F44726EA3B3400E065A1 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F44626EA3B3400E065A1 /* PhotosCollectionViewCell.swift */; };
 		2769F44B26EA54E300E065A1 /* DetailPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F44A26EA54E300E065A1 /* DetailPhotoViewController.swift */; };
+		2769F44F26EA7EBB00E065A1 /* PhotosCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2769F44E26EA7EBB00E065A1 /* PhotosCollectionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2769F41D26EA277400E065A1 /* TestProject_Nasa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject_Nasa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2769F42026EA277400E065A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2769F42226EA277400E065A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2769F42726EA277400E065A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2769F42A26EA277400E065A1 /* TestProject_Nasa.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestProject_Nasa.xcdatamodel; sourceTree = "<group>"; };
 		2769F42C26EA277500E065A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2769F42F26EA277500E065A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		2769F44426EA39DC00E065A1 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		2769F44626EA3B3400E065A1 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		2769F44A26EA54E300E065A1 /* DetailPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoViewController.swift; sourceTree = "<group>"; };
+		2769F44E26EA7EBB00E065A1 /* PhotosCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +74,10 @@
 				2769F43A26EA290000E065A1 /* Helpers */,
 				2769F43926EA28FD00E065A1 /* Model */,
 				2769F43826EA28F900E065A1 /* View */,
+				2769F44D26EA7E8200E065A1 /* ViewModel */,
 				2769F43726EA28F300E065A1 /* Controller */,
 				2769F42026EA277400E065A1 /* AppDelegate.swift */,
 				2769F42226EA277400E065A1 /* SceneDelegate.swift */,
-				2769F42626EA277400E065A1 /* Main.storyboard */,
 				2769F42C26EA277500E065A1 /* Assets.xcassets */,
 				2769F42E26EA277500E065A1 /* LaunchScreen.storyboard */,
 				2769F43126EA277500E065A1 /* Info.plist */,
@@ -126,6 +126,14 @@
 				2769F44426EA39DC00E065A1 /* NetworkDataFetcher.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		2769F44D26EA7E8200E065A1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2769F44E26EA7EBB00E065A1 /* PhotosCollectionsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +195,6 @@
 			files = (
 				2769F43026EA277500E065A1 /* LaunchScreen.storyboard in Resources */,
 				2769F42D26EA277500E065A1 /* Assets.xcassets in Resources */,
-				2769F42826EA277400E065A1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +207,7 @@
 			files = (
 				2769F44526EA39DC00E065A1 /* NetworkDataFetcher.swift in Sources */,
 				2769F43F26EA296A00E065A1 /* UIView+AutoLayout.swift in Sources */,
+				2769F44F26EA7EBB00E065A1 /* PhotosCollectionsViewModel.swift in Sources */,
 				2769F44B26EA54E300E065A1 /* DetailPhotoViewController.swift in Sources */,
 				2769F44726EA3B3400E065A1 /* PhotosCollectionViewCell.swift in Sources */,
 				2769F42126EA277400E065A1 /* AppDelegate.swift in Sources */,
@@ -214,14 +222,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2769F42626EA277400E065A1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2769F42726EA277400E065A1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2769F42E26EA277500E065A1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
