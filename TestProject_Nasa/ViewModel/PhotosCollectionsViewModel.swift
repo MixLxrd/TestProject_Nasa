@@ -10,12 +10,12 @@ import UIKit
 class PhotosCollectionsViewModel {
     
     var countPhotos: Int {
-        return photos.count
+        return photos?.photos.count ?? 0
     }
     
     let networkDataFetcher = NetworkDataFetcher()
     
-    var photos: [Photo] = [] {
+    var photos: Photos? {
         didSet {
             reloadComplition?()
         }
@@ -38,12 +38,12 @@ class PhotosCollectionsViewModel {
     
     func fetchImages(index: Int, complition: @escaping (UIImage?) -> Void) {
         DispatchQueue.main.async {
-            let stringURL = self.photos[index].imgSrc
-            let url = URL(string: stringURL)
+            let stringURL = self.photos?.photos[index].imgSrc
+            let url = URL(string: stringURL!)
             if let data = try? Data(contentsOf: url!) {
                 let image = UIImage(data: data)
                 complition(image)
-                self.photosImages[stringURL] = image
+                self.photosImages[stringURL!] = image
             }
         }
     }
