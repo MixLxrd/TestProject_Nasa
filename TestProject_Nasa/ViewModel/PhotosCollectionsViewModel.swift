@@ -37,15 +37,19 @@ class PhotosCollectionsViewModel {
     }
     
     func fetchImages(index: Int, complition: @escaping (UIImage?) -> Void) {
-        DispatchQueue.main.async {
             let stringURL = self.photos?.photos[index].imgSrc
-            let url = URL(string: stringURL!)
-            if let data = try? Data(contentsOf: url!) {
-                let image = UIImage(data: data)
-                complition(image)
-                self.photosImages[stringURL!] = image
+            
+            if photosImages[stringURL!] != nil {
+
+            } else {
+                let url = URL(string: stringURL!)
+                if let data = try? Data(contentsOf: url!) {
+                    let image = UIImage(data: data)
+                    complition(image)
+                    photosImages[stringURL!] = image
+                }
             }
-        }
+            
     }
     
     
