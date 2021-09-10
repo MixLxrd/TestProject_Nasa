@@ -8,7 +8,7 @@
 import UIKit
 
 class PhotosViewController: UIViewController {
-
+    
     var viewModel: PhotosCollectionsViewModel
     
     private lazy var photosCollectionView: UICollectionView = {
@@ -26,8 +26,11 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .blue
         setupLayout()
+        
         viewModel.reloadComplition = { [weak self] in
-            self?.photosCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self?.photosCollectionView.reloadData()
+            }
         }
         
     }
@@ -86,10 +89,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         /*
-        let vc = DetailPhotoViewController()
-        vc.albumsImageView.image = photosImages[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
-        */
+         let vc = DetailPhotoViewController()
+         vc.albumsImageView.image = photosImages[indexPath.row]
+         navigationController?.pushViewController(vc, animated: true)
+         */
         
     }
+    
+    
 }

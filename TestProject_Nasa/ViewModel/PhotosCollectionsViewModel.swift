@@ -36,21 +36,28 @@ class PhotosCollectionsViewModel {
         }
     }
     
-    func fetchImages(index: Int, complition: @escaping (UIImage?) -> Void) {
-            let stringURL = self.photos?.photos[index].imgSrc
-            
-            if photosImages[stringURL!] != nil {
-
-            } else {
-                let url = URL(string: stringURL!)
-                if let data = try? Data(contentsOf: url!) {
+    func fetchImages(index: Int, completion: @escaping (UIImage?) -> Void) {
+        guard let stringURL = self.photos?.photos[index].imgSrc else { return }
+        if let photo = self.photosImages[stringURL] {
+            completion(photo)
+        } else {
+            networkDataFetcher.networkService.request(urlString: stringURL) { [weak self] result in
+                switch result {
+                case .success(let data):
                     let image = UIImage(data: data)
-                    complition(image)
-                    photosImages[stringURL!] = image
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
+                    self?.photosImages[stringURL] = image
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
-            
+        }
     }
+    
+    
     
     
     init() {
