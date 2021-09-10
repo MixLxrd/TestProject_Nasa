@@ -7,16 +7,16 @@
 
 import UIKit
 
-class PhotosCollectionViewCell: UICollectionViewCell {
+final class PhotosCollectionViewCell: UICollectionViewCell {
     
-    var activityIndicator: UIActivityIndicatorView = {
+    private var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .large)
         activity.toAutoLayout()
         return activity
     }()
     
     
-    lazy var photoImageView: UIImageView = {
+    private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.toAutoLayout()
         imageView.contentMode = .scaleAspectFit

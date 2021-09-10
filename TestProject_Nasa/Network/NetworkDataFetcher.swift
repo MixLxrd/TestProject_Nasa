@@ -10,7 +10,7 @@ import Foundation
 //API key - oIVaSoj8Rc2L3tkhxxvShcbzKLQwaBcSnvHeMPPi
 //example request - https://api.nasa.gov/planetary/apod?api_key=oIVaSoj8Rc2L3tkhxxvShcbzKLQwaBcSnvHeMPPi
 
-class NetworkDataFetcher {
+final class NetworkDataFetcher {
     
     let networkService = NetworkService()
     

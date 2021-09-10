@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailPhotoViewController: UIViewController {
+final class DetailPhotoViewController: UIViewController {
 
     lazy var albumsImageView: UIImageView = {
         let imageView = UIImageView()

@@ -7,26 +7,26 @@
 
 import UIKit
 
-class PhotosCollectionsViewModel {
+final class PhotosCollectionsViewModel {
     
     var countPhotos: Int {
         return photos?.photos.count ?? 0
     }
     
-    let networkDataFetcher = NetworkDataFetcher()
+    private let networkDataFetcher = NetworkDataFetcher()
     
-    var photos: Photos? {
+    private var photos: Photos? {
         didSet {
             reloadComplition?()
         }
     }
     
-    var photosImages: [String:UIImage] = [:]
+    private var photosImages: [String:UIImage] = [:]
     
     var reloadComplition: (() -> Void)?
     
     //get json + parse to photos
-    func fetchData() {
+    private func fetchData() {
         networkDataFetcher.fetchPhotos { response in
             guard let search = response else { return }
             self.photos = search

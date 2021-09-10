@@ -7,11 +7,11 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+final class PhotosViewController: UIViewController {
     
     var viewModel: PhotosCollectionsViewModel
     
-    var activityIndicator = UIActivityIndicatorView(style: .large)
+    private var activityIndicator = UIActivityIndicatorView(style: .large)
     
     private lazy var photosCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,7 +28,6 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .blue
         setupLayout()
-        
         viewModel.reloadComplition = { [weak self] in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
