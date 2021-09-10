@@ -9,6 +9,13 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
+    var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.toAutoLayout()
+        return activity
+    }()
+    
+    
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.toAutoLayout()
@@ -34,11 +41,16 @@ class PhotosCollectionViewCell: UICollectionViewCell {
 extension PhotosCollectionViewCell {
     private func setupLayout() {
         addSubview(photoImageView)
+        addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         let constraints = [
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             photoImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
