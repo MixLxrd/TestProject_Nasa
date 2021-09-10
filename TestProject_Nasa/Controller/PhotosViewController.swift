@@ -11,6 +11,8 @@ class PhotosViewController: UIViewController {
     
     var viewModel: PhotosCollectionsViewModel
     
+    var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private lazy var photosCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -29,6 +31,7 @@ class PhotosViewController: UIViewController {
         
         viewModel.reloadComplition = { [weak self] in
             DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
                 self?.photosCollectionView.reloadData()
             }
         }
@@ -49,11 +52,17 @@ class PhotosViewController: UIViewController {
 extension PhotosViewController {
     private func setupLayout() {
         view.addSubview(photosCollectionView)
+        photosCollectionView.addSubview(activityIndicator)
+        activityIndicator.toAutoLayout()
+        activityIndicator.startAnimating()
         let constraints = [
             photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: photosCollectionView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: photosCollectionView.centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -80,6 +89,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
+        cell.activityIndicator.startAnimating()
         viewModel.fetchImages(index: indexPath.row) { [weak cell] image in
             cell?.photoImageView.image = image
             cell?.activityIndicator.stopAnimating()

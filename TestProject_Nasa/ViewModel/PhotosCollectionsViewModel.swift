@@ -21,13 +21,10 @@ class PhotosCollectionsViewModel {
         }
     }
     
-    var photosImages: [String:UIImage] = [:] {
-        didSet {
-            //photosCollectionView.reloadData()
-        }
-    }
+    var photosImages: [String:UIImage] = [:]
     
     var reloadComplition: (() -> Void)?
+    
     //get json + parse to photos
     func fetchData() {
         networkDataFetcher.fetchPhotos { response in
@@ -56,10 +53,7 @@ class PhotosCollectionsViewModel {
             }
         }
     }
-    
-    
-    
-    
+
     init() {
         fetchData()
     }

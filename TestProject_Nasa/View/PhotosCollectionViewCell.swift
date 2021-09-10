@@ -42,7 +42,6 @@ extension PhotosCollectionViewCell {
     private func setupLayout() {
         addSubview(photoImageView)
         addSubview(activityIndicator)
-        activityIndicator.startAnimating()
         let constraints = [
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
