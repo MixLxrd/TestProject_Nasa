@@ -89,10 +89,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as! PhotosCollectionViewCell
-        cell.activityIndicator.startAnimating()
         viewModel.fetchImages(index: indexPath.row) { [weak cell] image in
-            cell?.photoImageView.image = image
-            cell?.activityIndicator.stopAnimating()
+            guard let image = image else { return }
+            cell?.configureCell(image: image)
         }
         return cell
     }

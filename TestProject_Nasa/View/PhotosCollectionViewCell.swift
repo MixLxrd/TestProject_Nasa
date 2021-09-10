@@ -35,6 +35,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
+        activityIndicator.startAnimating()
     }
 }
 
@@ -42,6 +43,7 @@ extension PhotosCollectionViewCell {
     private func setupLayout() {
         addSubview(photoImageView)
         addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         let constraints = [
             photoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -52,5 +54,10 @@ extension PhotosCollectionViewCell {
             activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func configureCell(image: UIImage) {
+        photoImageView.image = image
+        activityIndicator.stopAnimating()
     }
 }
